@@ -21,7 +21,7 @@ class _TrackerMapState extends State<TrackerMap> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 426,
       child: GoogleMap(
