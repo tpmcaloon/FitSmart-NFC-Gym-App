@@ -1,8 +1,12 @@
+import 'package:fitness_app/pages/auth/signin.dart';
+import 'package:fitness_app/pages/auth/signup.dart';
 import 'package:fitness_app/pages/dashboard/dashboard.dart';
 import 'package:fitness_app/pages/home/home.dart';
 import 'package:fitness_app/pages/tracker/tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
 
 void main() {
 WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Fitness App',
       theme: ThemeData(
         fontFamily: 'Roboto',
@@ -26,13 +30,15 @@ class MyApp extends StatelessWidget {
           fontWeight: FontWeight.w900
         ))
       ),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       routes: {
         '/': (context) => const HomePage(),
+        '/signin':(context) => const SignInPage(),
+        '/signup':(context) => const SignUpPage(),
         '/dashboard':(context) => const DashboardPage(),
         '/tracker':(context) => const TrackerPage(),
       },
-      initialRoute: '/',
+      initialRoute: '/signin',
     );
   }
 }
