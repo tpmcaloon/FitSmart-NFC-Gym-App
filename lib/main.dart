@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fitness_app/pages/auth/authcontroller.dart';
 import 'package:fitness_app/pages/auth/signin.dart';
 import 'package:fitness_app/pages/auth/signup.dart';
 import 'package:fitness_app/pages/dashboard/dashboard.dart';
@@ -8,8 +10,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 
-void main() {
+Future<void> main() async {
 WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp().then((value) => Get.put(AuthController()));
 SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
   runApp(const MyApp());

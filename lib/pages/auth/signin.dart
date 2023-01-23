@@ -1,3 +1,4 @@
+import 'package:fitness_app/pages/auth/authcontroller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/pages/auth/signup.dart';
@@ -67,6 +68,7 @@ class _SignInPageState extends State<SignInPage> {
                       color: const Color.fromRGBO(40, 40, 40, 1)
                     ),
                     child: TextField(
+                      controller: emailController,
                       style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.email, color: Colors.white,),
@@ -106,6 +108,7 @@ class _SignInPageState extends State<SignInPage> {
                       color: const Color.fromRGBO(40, 40, 40, 1)
                     ),
                     child: TextField(
+                      controller: passwordController,
                       style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock, color: Colors.white,),
@@ -145,24 +148,29 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   const SizedBox( height: 60,),
                   Center(
-                    child: Container(
-                      width: w*0.5,
-                      height: h*0.08,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                            "assets/signInBackground.png"
-                          ),
-                          fit: BoxFit.cover
-                        )
-                      ),
-                      child: const Center(
-                        child: Text('Sign In', 
-                          style: TextStyle(
-                            fontSize: 36,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
+                    child: GestureDetector(
+                      onTap: (() {
+                        AuthController.instance.signIn(emailController.text.trim(), passwordController.text.trim());
+                      }),
+                      child: Container(
+                        width: w*0.5,
+                        height: h*0.08,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          image: const DecorationImage(
+                            image: AssetImage(
+                              "assets/signInBackground.png"
+                            ),
+                            fit: BoxFit.cover
+                          )
+                        ),
+                        child: const Center(
+                          child: Text('Sign In', 
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                            ),
                           ),
                         ),
                       ),

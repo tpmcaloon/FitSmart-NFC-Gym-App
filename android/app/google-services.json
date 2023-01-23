@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "445858384647",
+    "project_id": "fitsmart-418db",
+    "storage_bucket": "fitsmart-418db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445858384647:android:eaaa332c240ae43a9313a2",
+        "android_client_info": {
+          "package_name": "com.tommcaloon.fitnessApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445858384647-p0u6130235k5pq4d9i7g6n931ma32n1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmmufJYlNcKmxvikRGjxAC_BxvBhDGkUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445858384647-p0u6130235k5pq4d9i7g6n931ma32n1q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "445858384647-05qt7nkqoih8g33i6ff3nopirl5o31cj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tommcaloon.fitnessApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

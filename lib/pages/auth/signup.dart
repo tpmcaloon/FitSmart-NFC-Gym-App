@@ -1,6 +1,10 @@
+import 'package:fitness_app/pages/auth/authcontroller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -12,7 +16,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-
+    
     List images = [
       'google.jpg',
       'twitter.png',
@@ -65,6 +69,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       color: const Color.fromRGBO(40, 40, 40, 1)
                     ),
                     child: TextField(
+                      controller: emailController,
                       style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.email, color: Colors.white,),
@@ -103,6 +108,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       color: const Color.fromRGBO(40, 40, 40, 1)
                     ),
                     child: TextField(
+                      controller: passwordController,
+                      obscureText: true,
                       style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock, color: Colors.white,),
@@ -132,24 +139,29 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox( height: 60,),
                 
                   Center(
-                    child: Container(
-                      width: w*0.5,
-                      height: h*0.08,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                            "assets/signInBackground.png"
-                          ),
-                          fit: BoxFit.cover
-                        )
-                      ),
-                      child: const Center(
-                        child: Text('Sign Up', 
-                          style: TextStyle(
-                            fontSize: 36,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
+                    child: GestureDetector(
+                      onTap: (){
+                        AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+                      },
+                      child: Container(
+                        width: w*0.5,
+                        height: h*0.08,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          image: const DecorationImage(
+                            image: AssetImage(
+                              "assets/signInBackground.png"
+                            ),
+                            fit: BoxFit.cover
+                          )
+                        ),
+                        child: const Center(
+                          child: Text('Sign Up', 
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                            ),
                           ),
                         ),
                       ),
@@ -171,7 +183,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
 
-                  const SizedBox( height: 15,),
+                  const SizedBox( height: 15),
 
                   Center(
                     child: RichText(text: const TextSpan(

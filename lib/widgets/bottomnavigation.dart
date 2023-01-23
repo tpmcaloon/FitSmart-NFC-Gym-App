@@ -1,3 +1,4 @@
+import 'package:fitness_app/pages/auth/authcontroller.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatelessWidget {
@@ -44,14 +45,18 @@ class BottomNavigation extends StatelessWidget {
               ),
             ),
           ),
-
-          const Icon(Icons.date_range),
-
+          
           GestureDetector(
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/tracker');
             },
             child: const Icon(Icons.gps_fixed)),
+            
+            GestureDetector(
+              onTap: (() {
+                AuthController.instance.signOut();
+              }),
+              child: const Icon(Icons.logout)),
         ],
         ),
       ),
