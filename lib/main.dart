@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           fontWeight: FontWeight.w900
         ))
       ),
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const HomePage(),
         '/signin':(context) => const SignInPage(),
