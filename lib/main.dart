@@ -5,6 +5,7 @@ import 'package:fitness_app/pages/auth/signup.dart';
 import 'package:fitness_app/pages/dashboard/dashboard.dart';
 import 'package:fitness_app/pages/home/home.dart';
 import 'package:fitness_app/pages/tracker/tracker.dart';
+import 'package:fitness_app/pages/workoutLog/workoutLog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/signup':(context) => const SignUpPage(),
         '/dashboard':(context) => const DashboardPage(),
         '/tracker':(context) => const TrackerPage(),
+        '/workoutLog':(context) => const WorkoutLogPage(),
       },
       initialRoute: '/signin',
     );

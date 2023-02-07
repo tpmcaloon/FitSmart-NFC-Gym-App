@@ -21,7 +21,11 @@ class BottomNavigation extends StatelessWidget {
             },
             child: const Icon(Icons.add_chart)),
 
-          const Icon(Icons.search),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/workoutLog');
+            },
+            child: const Icon(Icons.fitness_center)),
 
           Transform.translate(
             offset: const Offset(0, -15),

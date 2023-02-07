@@ -19,7 +19,6 @@ class AuthController extends GetxController{
 
   _initialScreen(User? user){
     if(user==null){
-      print('Sign In Page');
       Get.offAll(()=>const SignInPage());
     }else{
       Get.offAll(()=>const HomePage());

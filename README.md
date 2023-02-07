@@ -1,4 +1,4 @@
-# Final Project Fitness NFC App
+# Final Project Fitness NFC App (FitSmart)
 
 The development of mobile applications has been an increasingly popular topic in recent years. The rise of smartphones and tablets has created a demand for applications that are user friendly, intuitive, and tailored to individual user needs. Fitness applications are among the most popular types of mobile applications, as they provide users with the ability to track their physical activity and monitor their progress.
 
