@@ -32,7 +32,7 @@ class _TrackerActivitiesState extends State<TrackerActivities> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Activities", 
-                style: Theme.of(context).textTheme.headline1),
+                style: Theme.of(context).textTheme.displayLarge),
                 const Icon(
                   Icons.arrow_forward_ios,
                   size: 20,

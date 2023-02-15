@@ -23,7 +23,7 @@ class BottomNavigation extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/workoutLog');
+              Navigator.of(context).pushReplacementNamed('/workoutlog');
             },
             child: const Icon(Icons.fitness_center)),
 

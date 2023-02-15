@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
@@ -5,6 +6,9 @@ class AppHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final displayName = user?.displayName ?? "No Username";
+    // final photoUrl = FirebaseAuth.instance.currentUser?.photoURL;
     return SizedBox(
       width: double.infinity,
       height: 185,
@@ -39,9 +43,9 @@ class AppHeader extends StatelessWidget {
             bottom: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const[
-                Text(
-                  "Hello,", 
+              children: [
+                const Text(
+                  'Hello,',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w300,
@@ -49,8 +53,8 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Thomas",
-                  style: TextStyle(
+                  displayName,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 26

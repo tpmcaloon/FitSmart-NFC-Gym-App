@@ -32,7 +32,7 @@ class _CurrentProgrammesState extends State<CurrentProgrammes> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Current Programmes", 
-                style: Theme.of(context).textTheme.headline1),
+                style: Theme.of(context).textTheme.displayLarge),
                 const Icon(
                   Icons.arrow_forward_ios,
                   size: 20,

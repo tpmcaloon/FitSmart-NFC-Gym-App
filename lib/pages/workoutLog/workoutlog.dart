@@ -1,23 +1,83 @@
-import 'package:fitness_app/pages/tracker/widgets/appbar.dart';
-import 'package:fitness_app/pages/tracker/widgets/activities.dart';
-import 'package:fitness_app/pages/tracker/widgets/tracker_map.dart';
-import 'package:fitness_app/widgets/bottomnavigation.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class WorkoutLogPage extends StatelessWidget {
-  const WorkoutLogPage({super.key});
+class LogWorkoutPage extends StatefulWidget {
+  const LogWorkoutPage({super.key});
+
+  @override
+  _LogWorkoutPageState createState() => _LogWorkoutPageState();
+}
+
+class _LogWorkoutPageState extends State<LogWorkoutPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _firestore = FirebaseFirestore.instance;
+  late String _date;
+  late String _type;
+  late String _duration;
+  late String _notes;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(25, 20, 20, 1),
-      appBar: MainAppBar(appBar: AppBar()),
-      body: Column(
-        children: const[
-          TrackerMap(),
-          TrackerActivities(),
-          BottomNavigation()
-        ],
+      appBar: AppBar(title: const Text('Log Workout')),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Date'),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter a date';
+                }
+                return null;
+              },
+              onSaved: (value) => _date = value!,
+            ),
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Type'),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter a type of workout';
+                }
+                return null;
+              },
+              onSaved: (value) => _type = value!,
+            ),
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Duration'),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter the duration of the workout';
+                }
+                return null;
+              },
+              onSaved: (value) => _duration = value!,
+            ),
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Notes'),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter any notes';
+                }
+                return null;
+              },
+              onSaved: (value) => _notes = value!,
+            ),
+            ElevatedButton(
+              child: const Text('Log Workout'),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  _firestore
+                      .collection('workouts')
+                      .add({'date': _date, 'type': _type, 'duration': _duration, 'notes': _notes});
+                  Navigator.pop(context);
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
