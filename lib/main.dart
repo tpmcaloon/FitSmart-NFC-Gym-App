@@ -1,11 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fitness_app/pages/NFC/NFCScan.dart';
 import 'package:fitness_app/pages/auth/authcontroller.dart';
 import 'package:fitness_app/pages/auth/signin.dart';
 import 'package:fitness_app/pages/auth/signup.dart';
 import 'package:fitness_app/pages/dashboard/dashboard.dart';
 import 'package:fitness_app/pages/home/home.dart';
-// import 'package:fitness_app/pages/onboarding/onboarding.dart';
 import 'package:fitness_app/pages/tracker/tracker.dart';
+import 'package:fitness_app/pages/workoutDashboard/workoutDashboard.dart';
 import 'package:fitness_app/pages/workoutLog/workoutlog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,9 +43,9 @@ class MyApp extends StatelessWidget {
         '/signup':(context) => const SignUpPage(),
         '/dashboard':(context) => const DashboardPage(),
         '/tracker':(context) => const TrackerPage(),
+        '/workoutDashboard':(context) => const WorkoutDashboard(),
         '/workoutlog':(context) => const LogWorkoutPage(),
-        // '/onboarding':(context) => const OnboardingPage(),
-
+        '/tag_read':(context) => const NFCScanPage(),
       },
       initialRoute: '/signin',
     );
