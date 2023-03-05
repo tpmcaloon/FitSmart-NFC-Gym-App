@@ -31,12 +31,17 @@ class _CurrentProgrammesState extends State<CurrentProgrammes> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Current Programmes", 
-                style: Theme.of(context).textTheme.displayLarge),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: Color.fromRGBO(30, 215, 96, 0.8),
+                Text("Current Programmes",
+                    style: Theme.of(context).textTheme.displayLarge),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacementNamed('/workoutDashboard');
+                    },
+                  child: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                    color: Color.fromRGBO(30, 215, 96, 0.8),
+                  ),
                 ),
               ],
             ),

@@ -11,7 +11,7 @@ class Stats extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(
             children: const [
-              Text('Workour Stats',
+              Text('Workout Stats',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w800,

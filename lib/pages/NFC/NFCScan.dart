@@ -12,7 +12,7 @@ class NFCScanPage extends StatelessWidget {
       backgroundColor: const Color.fromRGBO(25, 20, 20, 1),
       appBar: MainAppBar(appBar: AppBar()),
       body: Column(
-        children: const[
+        children: const [
           TagReadPage(),
           BottomNavigation()
         ],

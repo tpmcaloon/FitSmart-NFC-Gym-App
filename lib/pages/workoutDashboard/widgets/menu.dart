@@ -12,22 +12,22 @@ class WorkoutDashboardMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/tag_read');
                   },
                 child: const Text('Start Workout'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/workoutlog');
-                  },
-                child: const Text('View Past Workouts'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
               ),
-              ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/thirdPage');
-                  },
-                child: const Text('Third Page'),
+                Navigator.pushNamed(context, '/workoutlog');
+                },
+                child: const Text('View Past Workouts'),
               ),
             ],
           ),

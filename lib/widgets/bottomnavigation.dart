@@ -52,15 +52,24 @@ class BottomNavigation extends StatelessWidget {
           
           GestureDetector(
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/tracker');
+              Navigator.of(context).pushReplacementNamed('/diary');
             },
-            child: const Icon(Icons.gps_fixed)),
-            
+            child: const Icon(Icons.book)
+          ),
+
             GestureDetector(
-              onTap: (() {
-                AuthController.instance.signOut();
-              }),
-              child: const Icon(Icons.logout)),
+                onTap: () {
+                  Navigator.of(context).pushReplacementNamed('/tracker');
+                },
+                child: const Icon(Icons.gps_fixed)
+            ),
+            
+            // GestureDetector(
+            //   onTap: (() {
+            //     AuthController.instance.signOut();
+            //   }),
+            //   child: const Icon(Icons.logout)
+            // ),
         ],
         ),
       ),

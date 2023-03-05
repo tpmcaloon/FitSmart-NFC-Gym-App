@@ -1,4 +1,4 @@
-
+import 'package:fitness_app/pages/workoutDashboard/widgets/graph.dart';
 import 'package:fitness_app/pages/workoutDashboard/widgets/menu.dart';
 import 'package:fitness_app/widgets/bottomnavigation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +15,7 @@ class WorkoutDashboard extends StatelessWidget {
       body: Column(
         children: const[
           WorkoutDashboardMenu(),
+          RadialBarDefault(),
           BottomNavigation()
         ],
       ),

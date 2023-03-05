@@ -51,7 +51,7 @@ class _SignInPageState extends State<SignInPage> {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(30, 215, 96, 0.5)
+                      color: Color.fromRGBO(30, 215, 96, 1)
                     ),
                   ),
                   const SizedBox( height: 50,),
@@ -109,6 +109,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     child: TextField(
                       controller: passwordController,
+                      obscureText: true,
                       style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock, color: Colors.white,),
@@ -141,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
                       const Text('Forgot your Password?', 
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(30, 215, 96, 0.5)
+                        color: Color.fromRGBO(30, 215, 96, 1)
                         ),
                       ),
                     ],
@@ -183,14 +184,14 @@ class _SignInPageState extends State<SignInPage> {
             RichText(text: TextSpan(
               text: "Don't have an account?",
               style: const TextStyle(
-                color: Color.fromRGBO(255, 255, 255, 0.15),
+                color: Color.fromRGBO(150, 150, 150, 1),
                 fontSize: 15
                 ),
                 children: [
                   TextSpan(
                     text: " Create",
                     style: const TextStyle(
-                      color: Color.fromRGBO(30, 215, 96, 0.5),
+                      color: Color.fromRGBO(30, 215, 96, 1),
                       fontSize: 15,
                       fontWeight: FontWeight.bold
                     ),

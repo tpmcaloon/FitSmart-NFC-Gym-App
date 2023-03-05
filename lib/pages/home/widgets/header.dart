@@ -7,7 +7,7 @@ class AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final User? user = FirebaseAuth.instance.currentUser;
-    final displayName = user?.displayName ?? "No Username";
+    final displayName = user?.email?.substring(0, user.email?.indexOf('@')) ?? "No Username";
     // final photoUrl = FirebaseAuth.instance.currentUser?.photoURL;
     return SizedBox(
       width: double.infinity,
@@ -22,7 +22,9 @@ class AppHeader extends StatelessWidget {
               top: 20,
               left: 20,
               child: IconButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
               icon: const Icon(
                 Icons.menu,
                 color: Color.fromRGBO(30, 215, 96, 1,)
@@ -48,7 +50,7 @@ class AppHeader extends StatelessWidget {
                   'Hello,',
                   style: TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w400,
                     fontSize: 20
                   ),
                 ),
@@ -56,7 +58,7 @@ class AppHeader extends StatelessWidget {
                   displayName,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w900,
                     fontSize: 26
                   ),
                 ),

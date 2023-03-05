@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_app/pages/auth/authcontroller.dart';
+import 'package:fitness_app/pages/auth/signin.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
+var emailController = TextEditingController();
+var passwordController = TextEditingController();
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -14,6 +17,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     
@@ -25,6 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(25, 20, 20, 1),
       body: SingleChildScrollView(
@@ -136,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 
-                  const SizedBox( height: 60,),
+                  const SizedBox( height: 60),
                 
                   Center(
                     child: GestureDetector(
@@ -168,28 +174,37 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
 
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 25),
 
                   Center(
-                    child: RichText(
-                      text: TextSpan(
-                        recognizer: TapGestureRecognizer()..onTap = () => Get.back(),
-                        text: "Have an account?",
-                        style: const TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, 0.15),
+                    child: RichText(text: TextSpan(
+                      text: "Have an account?",
+                      style: const TextStyle(
+                          color: Color.fromRGBO(150, 150, 150, 1),
                           fontSize: 15
-                        ),
                       ),
+                      children: [
+                        TextSpan(
+                          text: " Sign In",
+                          style: const TextStyle(
+                              color: Color.fromRGBO(30, 215, 96, 1),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold
+                          ),
+                          recognizer: TapGestureRecognizer()..onTap = () => Get.back(result: () => const SignInPage()),
+                        ),
+                      ],
+                    ),
                     ),
                   ),
 
-                  const SizedBox( height: 15),
+                  const SizedBox( height: 45),
 
                   Center(
                     child: RichText(text: const TextSpan(
                       text: "Sign up using one of the following methods",
                       style: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 0.15),
+                        color: Color.fromRGBO(30, 215, 96, 1),
                         fontSize: 15
                       )
                     )
@@ -212,6 +227,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                 shape: BoxShape.circle,
                                 boxShadow: [BoxShadow(blurRadius: 7.5, color: Color.fromRGBO(30, 215, 96, 1), spreadRadius: 2.5)],
                               ),
+                              child: GestureDetector(
+                                  onTap: (){
+                                    FirebaseService()._googleSignIn.signIn().then((value) => null);
+                                  },
                               child: CircleAvatar(
                                 radius: 25,
                                 backgroundImage: AssetImage(
@@ -219,6 +238,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               ),
                             ),
+                            )
                         );
                       }
                     ),
@@ -232,5 +252,33 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+}
+
+class FirebaseService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  Future<String?> signInwithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+      await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      rethrow;
+    }
+    return null;
+  }
+
+  Future<void> signOutFromGoogle() async{
+    await _googleSignIn.signOut();
+    await _auth.signOut();
   }
 }

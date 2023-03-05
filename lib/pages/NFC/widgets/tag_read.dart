@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nfc_manager/platform_tags.dart';
 import 'package:provider/provider.dart';
-import 'package:fitness_app/pages/NFC/widgets/appbar.dart';
 
 class TagReadModel with ChangeNotifier {
   NfcTag? tag;
@@ -49,32 +48,39 @@ class TagReadPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(2),
-        children: [
-          FormSection(
-            children: [
-              FormRow(
-                title: Text('Add Exercise', style: TextStyle(color: Theme.of(context).colorScheme.primary)),
-                onTap: () => startSession(
-                  context: context,
-                  handleTag: Provider.of<TagReadModel>(context, listen: false).handleTag,
-                ),
-              ),
-            ],
+    return ChangeNotifierProvider<TagReadModel>(
+      create: (context) => TagReadModel(),
+      child: ListenableProvider<TagReadModel>(
+      create: (context) => TagReadModel(),
+      child: Expanded(
+          child: Scaffold(
+              body: Builder(
+                  builder: (BuildContext newContext) {
+                    return ListView(
+                      padding: const EdgeInsets.all(2),
+                      children: [
+                        FormSection(
+                          children: [
+                            FormRow(
+                              title: const Text('Add Exercise'),
+                              onTap: () => startSession(
+                                context: context,
+                                handleTag: Provider.of<TagReadModel>(context, listen: false).handleTag,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Consumer<TagReadModel>(builder: (context, model, _) {
+                          final tag = model.tag;
+                          final additionalData = model.additionalData;
+                          if (tag != null && additionalData != null)
+                            return _TagInfo(tag, additionalData);
+                          return const SizedBox.shrink();
+                        }),
+                      ],
+                    );
+                  }),
           ),
-          // consider: Selector<Tuple<{TAG}, {ADDITIONAL_DATA}>>
-          Consumer<TagReadModel>(builder: (context, model, _) {
-            final tag = model.tag;
-            final additionalData = model.additionalData;
-            if (tag != null && additionalData != null) {
-              return _TagInfo(tag, additionalData);
-            }
-            return const SizedBox.shrink();
-          }),
-        ],
       ),
       )
     );
@@ -328,7 +334,7 @@ class _TagInfo extends StatelessWidget {
       if (tech is MiFare) {
         tagWidgets.add(FormRow(
           title: const Text('Type'),
-          subtitle: Text('MiFare ' + _getMiFareFamilyString(tech.mifareFamily)),
+          subtitle: Text('MiFare ${_getMiFareFamilyString(tech.mifareFamily)}'),
         ));
         tagWidgets.add(FormRow(
           title: const Text('Identifier'),
@@ -344,12 +350,34 @@ class _TagInfo extends StatelessWidget {
     tech = Ndef.from(tag);
     if (tech is Ndef) {
       final cachedMessage = tech.cachedMessage;
+      final canMakeReadOnly = tech.additionalData['canMakeReadOnly'] as bool?;
+      final type = tech.additionalData['type'] as String?;
+      if (type != null) {
+        ndefWidgets.add(FormRow(
+          title: const Text('Type'),
+          subtitle: Text(_getNdefType(type)),
+        ));
+      }
+      ndefWidgets.add(FormRow(
+        title: const Text('Size'),
+        subtitle: Text('${cachedMessage?.byteLength ?? 0} / ${tech.maxSize} bytes'),
+      ));
+      ndefWidgets.add(FormRow(
+        title: const Text('Writable'),
+        subtitle: Text('${tech.isWritable}'),
+      ));
+      if (canMakeReadOnly != null) {
+        ndefWidgets.add(FormRow(
+          title: const Text('Can Make Read Only'),
+          subtitle: Text('$canMakeReadOnly'),
+        ));
+      }
       if (cachedMessage != null) {
         for (var i in Iterable.generate(cachedMessage.records.length)) {
           final record = cachedMessage.records[i];
           final info = NdefRecordInfo.fromNdef(record);
           ndefWidgets.add(FormRow(
-            title: Text('#$i ${info.subtitle}'),
+            title: Text('#$i ${info.title}'),
             subtitle: Text(info.subtitle),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => Navigator.push(context, MaterialPageRoute(
