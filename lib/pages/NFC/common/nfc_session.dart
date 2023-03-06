@@ -15,13 +15,14 @@ Future<void> startSession({
     );
   }
 
-  if (Platform.isAndroid)
+  if (Platform.isAndroid) {
     return showDialog(
       context: context,
       builder: (context) => _AndroidSessionDialog(alertMessage, handleTag),
     );
+  }
 
-  if (Platform.isIOS)
+  if (Platform.isIOS) {
     return NfcManager.instance.startSession(
       alertMessage: alertMessage,
       onDiscovered: (tag) async {
@@ -34,6 +35,7 @@ Future<void> startSession({
         }
       },
     );
+  }
 
   throw('unsupported platform: ${Platform.operatingSystem}');
 }
@@ -42,11 +44,11 @@ class _UnavailableDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Error'),
-      content: Text('NFC may not be supported or may be temporarily turned off.'),
+      title: const Text('Error'),
+      content: const Text('NFC may not be supported or may be temporarily turned off.'),
       actions: [
         TextButton(
-          child: Text('GOT IT'),
+          child: const Text('GOT IT'),
           onPressed: () => Navigator.pop(context),
         ),
       ],
@@ -55,7 +57,7 @@ class _UnavailableDialog extends StatelessWidget {
 }
 
 class _AndroidSessionDialog extends StatefulWidget {
-  _AndroidSessionDialog(this.alertMessage, this.handleTag);
+  const _AndroidSessionDialog(this.alertMessage, this.handleTag);
 
   final String alertMessage;
 

@@ -84,15 +84,14 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Scaffold(
+    return Scaffold(
         body: Stack(children: [
           GoogleMap(
             polylines: polyline,
             zoomControlsEnabled: false,
             onMapCreated: _onMapCreated,
             myLocationEnabled: true,
-            initialCameraPosition: CameraPosition(target: _center, zoom: 11),
+            initialCameraPosition: CameraPosition(target: _center, zoom: 16),
           ),
           Align(
               alignment: Alignment.bottomCenter,
@@ -171,7 +170,6 @@ class _MapPageState extends State<MapPage> {
                 ),
               ))
         ]
-        )
         )
     );
   }

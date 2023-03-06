@@ -42,17 +42,15 @@ class TagReadPage extends StatelessWidget {
   const TagReadPage({super.key});
 
   static Widget withDependency() => ChangeNotifierProvider<TagReadModel>(
-    create: (context) => TagReadModel(),
+    create: (_) => TagReadModel(),
     child: const TagReadPage(),
   );
 
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TagReadModel>(
-      create: (context) => TagReadModel(),
-      child: ListenableProvider<TagReadModel>(
-      create: (context) => TagReadModel(),
-      child: Expanded(
+   Widget build(BuildContext context) {
+    return ListenableProvider<TagReadModel>(
+      create: (_) => TagReadModel(),
+      builder: (context, child) {
+        return Expanded(
           child: Scaffold(
               body: Builder(
                   builder: (BuildContext newContext) {
@@ -81,11 +79,54 @@ class TagReadPage extends StatelessWidget {
                     );
                   }),
           ),
-      ),
-      )
+        );
+      }
     );
   }
 }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider<TagReadModel>(
+//       create: (_) => TagReadModel(),
+//       child: ListenableProvider<TagReadModel>(
+//       create: (_) => TagReadModel(),
+//       child: Expanded(
+//           child: Scaffold(
+//               body: Builder(
+//                   builder: (BuildContext newContext) {
+//                     return ListView(
+//                       padding: const EdgeInsets.all(2),
+//                       children: [
+//                         FormSection(
+//                           children: [
+//                             FormRow(
+//                               title: const Text('Add Exercise'),
+//                               onTap: () => startSession(
+//                                 context: context,
+//                                 handleTag: Provider.of<TagReadModel>(context, listen: false).handleTag,
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                         Consumer<TagReadModel>(builder: (context, model, _) {
+//                           final tag = model.tag;
+//                           final additionalData = model.additionalData;
+//                           if (tag != null && additionalData != null)
+//                             return _TagInfo(tag, additionalData);
+//                           return const SizedBox.shrink();
+//                         }),
+//                       ],
+//                     );
+//                   }),
+//           ),
+//       ),
+//       )
+//     );
+//   }
+//   
+// }
+
 
 class _TagInfo extends StatelessWidget {
   const _TagInfo(this.tag, this.additionalData);

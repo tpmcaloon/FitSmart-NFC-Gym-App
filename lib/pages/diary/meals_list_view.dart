@@ -2,8 +2,6 @@ import 'package:fitness_app/pages/diary/ui_view/fitness_app_theme.dart';
 import 'package:fitness_app/models/meals_list_data.dart';
 import 'package:flutter/material.dart';
 
-import '../../main.dart';
-
 class MealsListView extends StatefulWidget {
   const MealsListView(
       {Key? key, this.mainScreenAnimationController, this.mainScreenAnimation})

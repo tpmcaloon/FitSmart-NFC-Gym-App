@@ -270,8 +270,7 @@ class FirebaseService {
         idToken: googleSignInAuthentication.idToken,
       );
       await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
+    } on FirebaseAuthException {
       rethrow;
     }
     return null;

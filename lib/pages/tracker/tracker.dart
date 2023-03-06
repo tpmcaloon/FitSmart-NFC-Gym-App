@@ -54,7 +54,7 @@ class _TrackerPageState extends State<TrackerPage> {
         backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: const BottomNavigation(),// This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

@@ -48,8 +48,20 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
+	<key>NFCReaderUsageDescription</key>
+	<string>NFC Test</string>
+
 	<!-- Permission option for the 'location' -->
-	<key>NSLocationWhenInUsageDescription</key>
-	<string>Need location when in use</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>Need location when in use</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Need location when in use</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Need location when in use</string>
+
+	<key>com.apple.developer.healthkit</key>
+    <true/>
+    <key>com.apple.developer.healthkit.access</key>
+    <array/>
 </dict>
 </plist>
