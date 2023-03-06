@@ -63,7 +63,6 @@ class FormSection extends StatelessWidget {
   final List<Widget> children;
 
   final Widget? header;
-
   final Widget? footer;
 
   @override
@@ -76,7 +75,7 @@ class FormSection extends StatelessWidget {
             Container(
               alignment: Alignment.bottomLeft,
               padding: const EdgeInsets.fromLTRB(16, 0, 10, 4),
-              constraints: const BoxConstraints(minHeight: 36),
+              constraints: const BoxConstraints(minHeight: 6),
               child: DefaultTextStyle(
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 13),
                 child: header!,

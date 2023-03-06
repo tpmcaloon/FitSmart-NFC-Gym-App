@@ -4,7 +4,6 @@ import 'package:fitness_app/models/entry.dart';
 import 'package:fitness_app/pages/tracker/widgets/entry_card.dart';
 import 'package:fitness_app/db/db.dart';
 import 'package:fitness_app/pages/tracker/widgets/appbar.dart';
-
 import '../../widgets/bottomnavigation.dart';
 
 class TrackerPage extends StatefulWidget {

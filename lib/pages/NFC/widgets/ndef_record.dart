@@ -1,5 +1,4 @@
 import 'package:fitness_app/pages/NFC/model/record.dart';
-import 'package:fitness_app/pages/NFC/utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
@@ -7,7 +6,6 @@ class NdefRecordPage extends StatelessWidget {
   const NdefRecordPage(this.index, this.record, {super.key});
 
   final int index;
-
   final NdefRecord record;
 
   @override
@@ -15,44 +13,33 @@ class NdefRecordPage extends StatelessWidget {
     final info = NdefRecordInfo.fromNdef(record);
     return Scaffold(
       appBar: AppBar(
-        title: Text(info.subtitle),
+        title: Text(info.subtitle.replaceAll(('(en) '), ''),
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromRGBO(25, 20, 20, 1),
       ),
       body: ListView(
         padding: const EdgeInsets.all(12),
-        children: [
-          const SizedBox(height: 12),
-          _RecordColumn(
-            title: const Text('Personal Best'),
-            subtitle: Text('${record.byteLength} bytes'),
-          ),
+        children: const [
+          SizedBox(height: 12),
+          Text('Set 1', style: TextStyle(color: Colors.white)),
+          Text('Reps: ', style: TextStyle(color: Colors.white)),
+          Text('Weight: ', style: TextStyle( color: Colors.white)),
+          SizedBox(height: 12),
+          Text('Set 2', style: TextStyle(color: Colors.white)),
+          Text('Reps: ', style: TextStyle(color: Colors.white)),
+          Text('Weight: ', style: TextStyle(color: Colors.white)),
+          SizedBox(height: 12),
+          Text('Set 3', style: TextStyle(color: Colors.white)),
+          Text('Reps: ', style: TextStyle(color: Colors.white)),
+          Text('Weight: ', style: TextStyle(color: Colors.white)),
         ],
       ),
-    );
-  }
-}
-
-class _RecordColumn extends StatelessWidget {
-  const _RecordColumn({required this.title, required this.subtitle});
-
-  final Widget title;
-
-  final Widget subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DefaultTextStyle(
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16),
-          child: title,
-        ),
-        const SizedBox(height: 2),
-        DefaultTextStyle(
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 15),
-          child: subtitle,
-        ),
-      ],
     );
   }
 }
@@ -71,72 +58,10 @@ class NdefRecordInfo {
     if (_record is WellknownTextRecord) {
       return NdefRecordInfo(
         record: _record,
-        title: 'Wellknown Text',
+        title: 'Exercise',
         subtitle: '(${_record.languageCode}) ${_record.text}',
       );
     }
-    if (_record is WellknownUriRecord) {
-      return NdefRecordInfo(
-        record: _record,
-        title: 'Wellknown Uri',
-        subtitle: '${_record.uri}',
-      );
-    }
-    if (_record is MimeRecord) {
-      return NdefRecordInfo(
-        record: _record,
-        title: 'Mime',
-        subtitle: '(${_record.type}) ${_record.dataString}',
-      );
-    }
-    if (_record is AbsoluteUriRecord) {
-      return NdefRecordInfo(
-        record: _record,
-        title: 'Absolute Uri',
-        subtitle: '(${_record.uriType}) ${_record.payloadString}',
-      );
-    }
-    if (_record is ExternalRecord) {
-      return NdefRecordInfo(
-        record: _record,
-        title: 'External',
-        subtitle: '(${_record.domainType}) ${_record.dataString}',
-      );
-    }
-    if (_record is UnsupportedRecord) {
-      // more custom info from NdefRecord.
-      if (record.typeNameFormat == NdefTypeNameFormat.empty) {
-        return NdefRecordInfo(
-          record: _record,
-          title: _typeNameFormatToString(_record.record.typeNameFormat),
-          subtitle: '-',
-        );
-      }
-      return NdefRecordInfo(
-        record: _record,
-        title: _typeNameFormatToString(_record.record.typeNameFormat),
-        subtitle: '(${_record.record.type.toHexString()}) ${_record.record.payload.toHexString()}',
-      );
-    }
     throw UnimplementedError();
-  }
-}
-
-String _typeNameFormatToString(NdefTypeNameFormat format) {
-  switch (format) {
-    case NdefTypeNameFormat.empty:
-      return 'Empty';
-    case NdefTypeNameFormat.nfcWellknown:
-      return 'NFC Wellknown';
-    case NdefTypeNameFormat.media:
-      return 'Media';
-    case NdefTypeNameFormat.absoluteUri:
-      return 'Absolute Uri';
-    case NdefTypeNameFormat.nfcExternal:
-      return 'NFC External';
-    case NdefTypeNameFormat.unknown:
-      return 'Unknown';
-    case NdefTypeNameFormat.unchanged:
-      return 'Unchanged';
   }
 }

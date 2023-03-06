@@ -6,7 +6,7 @@ import 'package:nfc_manager/nfc_manager.dart';
 Future<void> startSession({
   required BuildContext context,
   required Future<String?> Function(NfcTag) handleTag,
-  String alertMessage = 'Hold your device near the item.',
+  String alertMessage = 'Hold your device near the machine.',
 }) async {
   if (!(await NfcManager.instance.isAvailable())) {
     return showDialog(
