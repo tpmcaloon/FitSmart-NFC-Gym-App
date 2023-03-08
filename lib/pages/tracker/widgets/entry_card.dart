@@ -9,6 +9,7 @@ class EntryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color.fromRGBO(25, 20, 20, 1),
       shape: RoundedRectangleBorder(
         side: const BorderSide(
           color: Color.fromRGBO(30, 215, 96, 1),
@@ -17,7 +18,6 @@ class EntryCard extends StatelessWidget {
       ),
       margin: const EdgeInsets.all(10),
       child: Container(
-        color: const Color.fromRGBO(25, 20, 20, 1),
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [

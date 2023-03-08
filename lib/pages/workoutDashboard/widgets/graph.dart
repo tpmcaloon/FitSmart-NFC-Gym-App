@@ -23,10 +23,13 @@ class RadialBarDefault extends StatelessWidget {
                 child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      SizedBox(
+                      Container(
                         width: w,
                         height: h*0.1,
+                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 60),
                         child: SfCircularChart(
+                          borderWidth: 2,
+                          borderColor: const Color.fromRGBO(30, 215, 96, 1),
                           backgroundColor: const Color.fromRGBO(25, 20, 20, 1),
                           legend: Legend(isVisible: true, textStyle: const TextStyle(color: Colors.white)),
                           title: ChartTitle(
@@ -39,9 +42,7 @@ class RadialBarDefault extends StatelessWidget {
                           ),
                           series: <CircularSeries>[
                             RadialBarSeries<ChartData, String>(
-                                gap: '7.5',
-                                strokeWidth: 1.25,
-                                strokeColor: Colors.white,
+                                gap: '5',
                                 pointColorMapper: (ChartData data, _) => data.color,
                                 trackColor: Colors.green,
                                 useSeriesColor: true,
@@ -61,10 +62,13 @@ class RadialBarDefault extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      Container(
                         width: w,
                         height: h*0.1,
+                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 60),
                         child: SfCircularChart(
+                          borderWidth: 2,
+                          borderColor: const Color.fromRGBO(30, 215, 96, 1),
                           backgroundColor: const Color.fromRGBO(25, 20, 20, 1),
                           legend: Legend(isVisible: true, textStyle: const TextStyle(color: Colors.white)),
                           title: ChartTitle(
@@ -77,9 +81,7 @@ class RadialBarDefault extends StatelessWidget {
                           ),
                           series: <CircularSeries>[
                             RadialBarSeries<ChartData, String>(
-                                gap: '7.5',
-                                strokeWidth: 1.25,
-                                strokeColor: Colors.white,
+                                gap: '5',
                                 pointColorMapper: (ChartData data, _) => data.color,
                                 trackColor: Colors.green,
                                 useSeriesColor: true,
@@ -98,7 +100,7 @@ class RadialBarDefault extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
+                      ),
                     ]
                 )
             )

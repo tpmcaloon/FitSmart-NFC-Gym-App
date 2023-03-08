@@ -211,42 +211,40 @@ class _SignUpPageState extends State<SignUpPage> {
                   )
                 ),
 
-                const SizedBox( height: 10,),
-
-                Center(
-                  child: Wrap(
-
-                    children: List<Widget>.generate(
-                        3, 
-                        (index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [BoxShadow(blurRadius: 7.5, color: Color.fromRGBO(30, 215, 96, 1), spreadRadius: 2.5)],
+                      const SizedBox( height: 10,),
+                      Center(
+                        child: Wrap(
+                          children: List<Widget>.generate(
+                              3,
+                                  (index) {
+                                return Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [BoxShadow(blurRadius: 7.5, color: Color.fromRGBO(30, 215, 96, 1), spreadRadius: 2.5)],
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          FirebaseService()._googleSignIn.signIn().then((value) => null);
+                                          },
+                                        child: CircleAvatar(
+                                          radius: 25,
+                                          backgroundImage: AssetImage(
+                                              'assets/' + images[index]
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                );
+                              }
                               ),
-                              child: GestureDetector(
-                                  onTap: (){
-                                    FirebaseService()._googleSignIn.signIn().then((value) => null);
-                                  },
-                              child: CircleAvatar(
-                                radius: 25,
-                                backgroundImage: AssetImage(
-                                  'assets/' + images[index]
-                                ),
-                              ),
-                            ),
-                            )
-                        );
-                      }
-                    ),
+                        ),
+                      )
+                    ],
                   ),
-                )
-                ],
-              ),
-            ),
+                ),
             SizedBox(height: w * 0.1,),
           ],
         ),

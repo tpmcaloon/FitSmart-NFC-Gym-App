@@ -13,7 +13,7 @@ class WorkoutDashboardMenu extends StatelessWidget {
             children: <Widget>[
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/tag_read');
@@ -22,7 +22,7 @@ class WorkoutDashboardMenu extends StatelessWidget {
               ),
               ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
               ),
                 onPressed: () {
                 Navigator.pushNamed(context, '/workoutlog');

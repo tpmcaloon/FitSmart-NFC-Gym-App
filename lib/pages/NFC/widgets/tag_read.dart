@@ -61,6 +61,14 @@ class TagReadPage extends StatelessWidget {
                           }
                           return const SizedBox.shrink();
                         }),
+                        ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
+                    ),
+                    onPressed: () {
+                    Navigator.pushNamed(context, '/workoutlog');
+                    },
+                    child: const Text('Finish Workout'))
                       ],
                     );
                   }),

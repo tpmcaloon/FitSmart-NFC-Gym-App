@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Fitness App',
+      title: 'FitSmart',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromRGBO(40, 40, 40, 1),
         fontFamily: 'Roboto',
