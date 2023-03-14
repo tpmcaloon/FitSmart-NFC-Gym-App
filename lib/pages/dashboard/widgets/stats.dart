@@ -1,7 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:health/health.dart';
 
-class Stats extends StatelessWidget {
-  const Stats({super.key});
+class Stats extends StatefulWidget {
+  const Stats({Key? key}) : super(key: key);
+
+  @override
+  _StatsState createState() => _StatsState();
+}
+
+class _StatsState extends State<Stats> {
+  String? heartRate;
+  String? bp;
+  String? steps;
+  String? distance;
+  String? activeEnergy;
+  String? exerciseTime;
+  String? flightsClimbed;
+
+  List<HealthDataPoint> healthData = [];
+
+  HealthFactory health = HealthFactory();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  /// Fetch data points from the health plugin and show them in the app.
+  Future fetchData() async {
+    // define the types to get
+    final types = [
+      HealthDataType.RESTING_HEART_RATE,
+      HealthDataType.STEPS,
+      HealthDataType.ACTIVE_ENERGY_BURNED,
+      HealthDataType.EXERCISE_TIME,
+      HealthDataType.DISTANCE_WALKING_RUNNING,
+      HealthDataType.FLIGHTS_CLIMBED
+    ];
+
+    // get data within the last 24 hours
+    final now = DateTime.now();
+    final yesterday = now.subtract(const Duration(days: 1));
+
+    // requesting access to the data types before reading them
+    bool requested = await health.requestAuthorization(types);
+
+    if (requested) {
+      try {
+        // fetch health data
+        healthData = await health.getHealthDataFromTypes(yesterday, now, types);
+
+        if (healthData.isNotEmpty) {
+          for (HealthDataPoint h in healthData) {
+            if (h.type == HealthDataType.RESTING_HEART_RATE) {
+              heartRate = "${h.value}";
+            } else if (h.type == HealthDataType.STEPS) {
+              steps = "${h.value}";
+            } else if (h.type == HealthDataType.ACTIVE_ENERGY_BURNED) {
+              activeEnergy = "${h.value}";
+            } else if (h.type == HealthDataType.EXERCISE_TIME) {
+              exerciseTime = "${h.value}";
+            } else if (h.type == HealthDataType.FLIGHTS_CLIMBED) {
+              flightsClimbed = "${h.value}";
+            }
+          }
+          setState(() {});
+        }
+      } catch (error) {
+        print("Exception in getHealthDataFromTypes: $error");
+      }
+
+      // filter out duplicates
+      healthData = HealthFactory.removeDuplicates(healthData);
+    } else {
+      print("Authorization not granted");
+    }
+  }
+// class Stats extends StatelessWidget {
+//   const Stats({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,35 +107,62 @@ class Stats extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: const [
-              SizedBox(width: 30),
+            children: [
+              const SizedBox(width: 30),
               InfoStat(
                 icon: Icons.timer, 
-                iconColor: Color.fromRGBO(30, 215, 96, 1), 
-                iconBackground: Color.fromRGBO(50, 80, 50, 1), 
+                iconColor: const Color.fromRGBO(30, 215, 96, 1), 
+                iconBackground: const Color.fromRGBO(50, 80, 50, 1), 
                 time: '+5s', 
                 label: 'Time', 
-                value: '30:34'
+                value: '$exerciseTime'
               ),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
               InfoStat(
                 icon: Icons.favorite_border_outlined, 
-                iconColor: Color(0xffe11e6c), 
-                iconBackground: Color.fromRGBO(80,50,50,1), 
+                iconColor: const Color(0xffe11e6c), 
+                iconBackground: const Color.fromRGBO(80,50,50,1), 
                 time: '+Intensity', 
                 label: 'Heart Rate', 
-                value: '157 bpm'
+                value: '$heartRate'
               ),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
               InfoStat(
                 icon: Icons.bolt, 
-                iconColor: Color(0xffd3b50f), 
-                iconBackground: Color.fromRGBO(80, 80, 50, 1), 
+                iconColor: const Color(0xffd3b50f), 
+                iconBackground: const Color.fromRGBO(80, 80, 50, 1), 
                 time: '+30kcal', 
                 label: 'Energy', 
-                value: '213kcal'
+                value: '$activeEnergy'
               ),
-              SizedBox(width: 30),
+              const SizedBox(width: 15),
+              InfoStat(
+                icon: Icons.directions_walk, 
+                iconColor: const Color.fromARGB(255, 15, 31, 211), 
+                iconBackground: const Color.fromRGBO(60, 60, 100, 1), 
+                time: '+30kcal', 
+                label: 'Steps', 
+                value: '$steps'
+              ),
+              const SizedBox(width: 15),
+              InfoStat(
+                icon: Icons.pin_drop, 
+                iconColor: const Color.fromARGB(255, 139, 15, 211), 
+                iconBackground: const Color.fromARGB(255, 77, 50, 80), 
+                time: '+30kcal', 
+                label: 'Distance', 
+                value: '$distance'
+              ),
+              const SizedBox(width: 15),
+              InfoStat(
+                icon: Icons.stairs, 
+                iconColor: const Color(0xffd3b50f), 
+                iconBackground: const Color.fromRGBO(80, 80, 50, 1), 
+                time: '+30kcal', 
+                label: 'Flights Climbed', 
+                value: '$flightsClimbed'
+              ),
+              const SizedBox(width: 30),
             ],
           ),
         )

@@ -5,6 +5,7 @@ import 'package:fitness_app/pages/auth/signin.dart';
 import 'package:fitness_app/pages/auth/signup.dart';
 import 'package:fitness_app/pages/dashboard/dashboard.dart';
 import 'package:fitness_app/pages/home/home.dart';
+import 'package:fitness_app/pages/survey/survey.dart';
 import 'package:fitness_app/pages/tracker/tracker.dart';
 import 'package:fitness_app/pages/workoutDashboard/workout_dashboard.dart';
 import 'package:fitness_app/pages/workoutLog/workoutlog.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         '/workoutlog':(context) => const LogWorkoutPage(),
         '/tag_read':(context) => const NFCScanPage(),
         '/diary':(context) => const DiaryScreen(),
+        'https://gja6ormyogx.typeform.com/to/r2dJh7Qx':(context) => const SurveyPage(),
       },
       initialRoute: '/signin',
     );

@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               SizedBox(
-                height: h*0.125,
+                height: h*0.15,
                 child: const DrawerHeader(
                   decoration: BoxDecoration(
                     color: Color.fromRGBO(30, 215, 96, 1),
@@ -104,6 +104,17 @@ class HomePage extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pushNamed('/tracker');
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.question_answer, color: Colors.white),
+                title: const Text('Survey',
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/survey');
                 },
               ),
               ListTile(

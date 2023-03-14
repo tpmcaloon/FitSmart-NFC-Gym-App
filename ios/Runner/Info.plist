@@ -51,6 +51,25 @@
 	<key>NFCReaderUsageDescription</key>
 	<string>NFC Test</string>
 
+	<key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
+	<array>
+		<string>0003</string>
+		<string>04D1</string>
+		<string>8008</string>
+		<string>80DE</string>
+		<string>865E</string>
+		<string>8592</string>
+		<string>8B5D</string>
+		<string>8FC1</string>
+		<string>FE00</string>
+	</array>
+
+	<!-- Permission option for the 'Healthkit' -->
+	<key>NSHealthShareUsageDescription</key>
+	<string>We will sync your data with the Apple Health app to give you better insights</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We will sync your data with the Apple Health app to give you better insights</string>
+
 	<!-- Permission option for the 'location' -->
 	<key>NSLocationAlwaysUsageDescription</key>
     <string>Need location when in use</string>
