@@ -5,15 +5,13 @@ import 'package:fitness_app/pages/home/widgets/header.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/bottomnavigation.dart';
 import '../auth/authcontroller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
 
     final User? user = FirebaseAuth.instance.currentUser;
     final displayName = user?.email ?? "No Username";
@@ -26,7 +24,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               SizedBox(
-                height: h*0.15,
+                height: MediaQuery.of(context).size.height*0.15,
                 child: const DrawerHeader(
                   decoration: BoxDecoration(
                     color: Color.fromRGBO(30, 215, 96, 1),
@@ -49,7 +47,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: h*0.05),
+              SizedBox(height: MediaQuery.of(context).size.height*0.05),
 
               ListTile(
               leading: const Icon(Icons.home, color: Colors.white),
@@ -106,16 +104,14 @@ class HomePage extends StatelessWidget {
                   Navigator.of(context).pushNamed('/tracker');
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.question_answer, color: Colors.white),
-                title: const Text('Survey',
+              const ListTile(
+                leading: Icon(Icons.question_answer, color: Colors.white),
+                title: Text('Survey',
                   style: TextStyle(
                       color: Colors.white
                   ),
                 ),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/survey');
-                },
+                onTap: _launchURL
               ),
               ListTile(
                 leading: const Icon(Icons.logout, color: Colors.white),
@@ -141,4 +137,10 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+_launchURL() async {
+  const url = 'https://gja6ormyogx.typeform.com/to/r2dJh7Qx';
+  final uri = Uri.parse(url);
+    await launchUrl(uri);
 }

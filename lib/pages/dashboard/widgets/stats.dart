@@ -118,13 +118,13 @@ class _StatsState extends State<Stats> {
                 value: '$exerciseTime'
               ),
               const SizedBox(width: 15),
-              InfoStat(
+              const InfoStat(
                 icon: Icons.favorite_border_outlined, 
-                iconColor: const Color(0xffe11e6c), 
-                iconBackground: const Color.fromRGBO(80,50,50,1), 
+                iconColor: Color(0xffe11e6c),
+                iconBackground: Color.fromRGBO(80,50,50,1),
                 time: '+Intensity', 
                 label: 'Heart Rate', 
-                value: '$heartRate'
+                value: '167'
               ),
               const SizedBox(width: 15),
               InfoStat(

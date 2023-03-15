@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:fitness_app/models/entry.dart';
+import 'package:fitness_app/models/tracker_entry.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});

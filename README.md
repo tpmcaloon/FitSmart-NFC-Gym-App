@@ -7,8 +7,8 @@ Flutter is a framework for creating mobile applications that is becoming increas
 The aim of this project is to examine the development of a fitness application built using Flutter that utilises NFC technology. The development process of the application will be discussed, including the technologies used, the challenges and issues encountered, and how they were addressed. Additionally, the usability of the application will be evaluated and suggestions for further development will be discussed.
 
 # Timeline + Notes
+https://trello.com/b/fB9bakVm/fitsmart-final-project
 
-# Research
 ## Getting Started
 
 This project is a starting point for a Flutter application.

@@ -1,6 +1,5 @@
 import 'dart:convert' show ascii, utf8;
 import 'dart:typed_data';
-
 import 'package:nfc_manager/nfc_manager.dart';
 
 abstract class Record {
@@ -30,9 +29,7 @@ class WellknownTextRecord implements Record {
   WellknownTextRecord({this.identifier, required this.languageCode, required this.text});
 
   final Uint8List? identifier;
-
   final String languageCode;
-
   final String text;
 
   static WellknownTextRecord fromNdef(NdefRecord record) {

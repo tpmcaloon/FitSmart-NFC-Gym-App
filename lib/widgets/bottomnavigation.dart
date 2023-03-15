@@ -1,4 +1,3 @@
-import 'package:fitness_app/pages/auth/authcontroller.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatelessWidget {

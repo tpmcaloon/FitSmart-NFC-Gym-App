@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
-import 'package:fitness_app/models/entry.dart';
+import 'package:fitness_app/models/tracker_entry.dart';
 
 abstract class DB {
   static Database? _db;

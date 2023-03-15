@@ -81,6 +81,7 @@ class Program extends StatelessWidget {
     return GestureDetector(
       onTap:() {
         onTap(programs.type);
+          Navigator.of(context).pushReplacementNamed('/tag_read');
       },
       child: Container(
         height: 125,

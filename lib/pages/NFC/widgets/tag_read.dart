@@ -34,10 +34,10 @@ class TagReadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableProvider<TagReadModel>(
-      create: (_) => TagReadModel(),
-      builder: (context, child) {
-        return Expanded(
-          child: Scaffold(
+        create: (_) => TagReadModel(),
+        builder: (context, child) {
+          return Expanded(
+            child: Scaffold(
               body: Builder(
                   builder: (BuildContext newContext) {
                     return ListView(
@@ -62,20 +62,19 @@ class TagReadPage extends StatelessWidget {
                           return const SizedBox.shrink();
                         }),
                         ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
-                    ),
-                    onPressed: () {
-                    Navigator.pushNamed(context, '/workoutlog');
-                    },
-                    child: const Text('Finish Workout'))
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/workoutlog');
+                              },
+                            child: const Text('Finish Workout'))
                       ],
                     );
                   }),
-          ),
-        );
-      }
-    );
+            ),
+          );
+        });
   }
 }
 
