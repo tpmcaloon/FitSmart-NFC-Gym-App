@@ -17,6 +17,7 @@ Future<void> main() async {
 WidgetsFlutterBinding.ensureInitialized();
 await Firebase.initializeApp().then((value) => Get.put(AuthController()));
 SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
