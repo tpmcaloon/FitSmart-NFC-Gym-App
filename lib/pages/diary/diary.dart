@@ -129,10 +129,16 @@ class _DiaryState extends State<DiaryScreen> {
             key: const Key("add_food_modal"),
             actions: <Widget>[
               ElevatedButton(
-                onPressed: () => Navigator.pop(context), // passing false
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                ),
+                onPressed: () => Navigator.pop(context),
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1DB954),
+                ),
                 onPressed: () async {
                   if (checkFormValid()) {
                     Navigator.pop(context);
@@ -147,11 +153,11 @@ class _DiaryState extends State<DiaryScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
                           "Invalid form data! All numeric fields must contain numeric values greater than 0"),
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.red,
                     ));
                   }
                 },
-                child: const Text('Ok', key: Key("add_food_modal_submit")),
+                child: const Text('Add Food', key: Key("add_food_modal_submit")),
               ),
             ],
           );
@@ -172,9 +178,14 @@ class _DiaryState extends State<DiaryScreen> {
       key: _addFoodKey,
       child: Column(children: [
         TextFormField(
+          style: const TextStyle(color: Colors.white),
           key: const Key('add_food_modal_food_name_field'),
           decoration: const InputDecoration(
-              labelText: "Name *", hintText: "Please enter food name"),
+            labelText: "Food Name", labelStyle: TextStyle(color: Color(0xFF1DB954), fontWeight: FontWeight.w900),
+            hintText: "Enter food name", hintStyle: TextStyle(color: Colors.white),
+            focusedBorder:UnderlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 0.5)
+            ),
+          ),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "Please enter the food name";
@@ -183,15 +194,17 @@ class _DiaryState extends State<DiaryScreen> {
           },
           onChanged: (value) {
             addFoodTrack.food_name = value;
-
-            // addFood.calories = value;
           },
         ),
         TextFormField(
+          style: const TextStyle(color: Colors.white),
           key: const Key('add_food_modal_calorie_field'),
           decoration: const InputDecoration(
-              labelText: "Calories *",
-              hintText: "Please enter a calorie amount"),
+            labelText: "Calories", labelStyle: TextStyle(color: Color(0xFF1DB954), fontWeight: FontWeight.w900),
+            hintText: "Enter calorie amount", hintStyle: TextStyle(color: Colors.white),
+            focusedBorder:UnderlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 0.5)
+            ),
+          ),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "Please enter a calorie amount";
@@ -211,9 +224,14 @@ class _DiaryState extends State<DiaryScreen> {
           },
         ),
         TextFormField(
+          style: const TextStyle(color: Colors.white),
           key: const Key('add_food_modal_carbs_field'),
           decoration: const InputDecoration(
-              labelText: "Carbs *", hintText: "Please enter a carbs amount"),
+            labelText: "Carbs", labelStyle: TextStyle(color: Color(0xFF1DB954), fontWeight: FontWeight.w900),
+            hintText: "Enter carbs amount", hintStyle: TextStyle(color: Colors.white),
+            focusedBorder:UnderlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 0.5)
+            ),
+          ),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "Please enter a carbs amount";
@@ -230,16 +248,21 @@ class _DiaryState extends State<DiaryScreen> {
           },
         ),
         TextFormField(
+          style: const TextStyle(color: Colors.white),
           key: const Key('add_food_modal_protein_field'),
           decoration: const InputDecoration(
-              labelText: "Protein *",
-              hintText: "Please enter a protein amount"),
+            labelText: "Protein", labelStyle: TextStyle(color: Color(0xFF1DB954), fontWeight: FontWeight.w900),
+            hintText: "Enter protein amount", hintStyle: TextStyle(color: Colors.white),
+            focusedBorder:UnderlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 0.5)
+            ),
+          ),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter a calorie amount";
+              return "Please enter a protein amount";
             }
             return null;
           },
+          keyboardType: TextInputType.number,
           onChanged: (value) {
             try {
               addFoodTrack.protein = int.parse(value);
@@ -249,15 +272,21 @@ class _DiaryState extends State<DiaryScreen> {
           },
         ),
         TextFormField(
+          style: const TextStyle(color: Colors.white),
           key: const Key('add_food_modal_fat_field'),
           decoration: const InputDecoration(
-              labelText: "Fat *", hintText: "Please enter a fat amount"),
+            labelText: "Fat", labelStyle: TextStyle(color: Color(0xFF1DB954), fontWeight: FontWeight.w900),
+            hintText: "Enter fat amount", hintStyle: TextStyle(color: Colors.white),
+            focusedBorder:UnderlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 0.5)
+            ),
+          ),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "Please enter a fat amount";
             }
             return null;
           },
+          keyboardType: TextInputType.number,
           onChanged: (value) {
             try {
               addFoodTrack.fat = int.parse(value);
@@ -273,13 +302,15 @@ class _DiaryState extends State<DiaryScreen> {
   Widget _showUserAmount() {
     return Expanded(
       child: TextField(
+          style: const TextStyle(color: Colors.white),
           key: const Key("add_food_modal_grams_field"),
           maxLines: 1,
-          autofocus: true,
           decoration: const InputDecoration(
-              labelText: 'Grams *',
-              hintText: 'eg. 100',
-              contentPadding: EdgeInsets.all(0.0)),
+            labelText: "Grams", labelStyle: TextStyle(color: Color(0xFF1DB954), fontWeight: FontWeight.w900),
+            hintText: "eg. 100g", hintStyle: TextStyle(color: Colors.white),
+            focusedBorder:UnderlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 0.5)
+            ),
+          ),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.digitsOnly
@@ -635,7 +666,9 @@ class FoodTrackTile extends StatelessWidget {
   }
 
   Widget _expandedView(BuildContext context) {
-    return Padding(
+    return Container(
+        color: Color.fromRGBO(25, 20, 20, 1),
+    child: Padding(
       padding: const EdgeInsets.fromLTRB(20.0, 0.0, 15.0, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -647,6 +680,7 @@ class FoodTrackTile extends StatelessWidget {
           _expandedFat(),
         ],
       ),
+    )
     );
   }
 

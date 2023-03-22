@@ -160,7 +160,7 @@ class _MapPageState extends State<MapPage> {
                                 duration: _displayTime,
                                 speed:
                                 _speedCounter == 0 ? 0 : _avgSpeed / _speedCounter,
-                                distance: _dist, id: 1);
+                                distance: _dist);
                             Navigator.pop(context, en);
                             },
                         ),

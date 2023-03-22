@@ -44,7 +44,7 @@ class RadialBarDefault extends StatelessWidget {
                             RadialBarSeries<ChartData, String>(
                                 gap: '5',
                                 pointColorMapper: (ChartData data, _) => data.color,
-                                trackColor: Colors.green,
+                                trackColor: const Color.fromRGBO(30, 215, 96, 1),
                                 useSeriesColor: true,
                                 trackOpacity: 0.3,
                                 dataSource: chartData,
@@ -66,44 +66,37 @@ class RadialBarDefault extends StatelessWidget {
                         width: w,
                         height: h*0.1,
                         padding: const EdgeInsets.fromLTRB(30, 0, 30, 60),
-                        child: SfCircularChart(
+                        child: SfCartesianChart(
+                          primaryXAxis: CategoryAxis(),
+                          primaryYAxis: NumericAxis(),
+                          plotAreaBorderColor: Colors.transparent,
                           borderWidth: 2,
                           borderColor: const Color.fromRGBO(30, 215, 96, 1),
                           backgroundColor: const Color.fromRGBO(25, 20, 20, 1),
-                          legend: Legend(isVisible: true, textStyle: const TextStyle(color: Colors.white)),
+                          legend: Legend(
+                            isVisible: true,
+                            textStyle: const TextStyle(color: Colors.white),
+                          ),
                           title: ChartTitle(
                             text: 'Daily Goals',
                             textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w900
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w900,
                             ),
                           ),
-                          series: <CircularSeries>[
-                            RadialBarSeries<ChartData, String>(
-                                gap: '5',
-                                pointColorMapper: (ChartData data, _) => data.color,
-                                trackColor: Colors.green,
-                                useSeriesColor: true,
-                                trackOpacity: 0.3,
-                                dataSource: chartData,
-                                xValueMapper: (ChartData data, _) => data.x,
-                                yValueMapper: (ChartData data, _) => data.y,
-                                dataLabelSettings: const DataLabelSettings(
-                                    isVisible: true,
-                                    color: Color.fromRGBO(50, 50, 50, 1),
-                                    textStyle: TextStyle(color: Colors.white)
-                                ),
-                                radius: '75%',
-                                innerRadius: '35%',
-                                cornerStyle: CornerStyle.endCurve
+                          series: <CartesianSeries>[
+                            ColumnSeries<ChartData, String>(
+                              color: const Color.fromRGBO(30, 215, 96, 1),
+                              dataSource: chartData,
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y,
                             ),
                           ],
                         ),
                       ),
-                    ]
-                )
-            )
+                    ]),
+            ),
         )
     );
   }

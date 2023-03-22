@@ -15,7 +15,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget{
       elevation: 0,
       leading: IconButton(
         onPressed: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).pushReplacementNamed('/');
         },
         icon: const Icon(
           Icons.arrow_back_ios,

@@ -11,7 +11,7 @@ class RecentActivities extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(
             vertical: 35,
-            horizontal: 25
+            horizontal: 15
         ),
         color: const Color.fromRGBO(25, 20, 20, 1),
         child: Column(

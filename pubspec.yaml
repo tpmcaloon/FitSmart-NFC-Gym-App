@@ -54,6 +54,7 @@ dependencies:
   fl_chart: ^0.61.0
   url_launcher: ^6.1.10
   json_annotation: ^4.8.0
+  permission: ^0.1.7
   
 dev_dependencies:
   dependency_validator: ^3.0.0

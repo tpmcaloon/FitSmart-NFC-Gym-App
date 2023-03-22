@@ -18,7 +18,7 @@
 
 
     <application
-        android:label="fitness_app"
+        android:label="FitSmart"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

@@ -7,15 +7,15 @@ import 'package:nfc_manager/nfc_manager.dart';
 import 'package:provider/provider.dart';
 
 class TagReadModel with ChangeNotifier {
-  NfcTag? tag;
+  List<NfcTag> tags = [];
 
-  final CollectionReference _sets =
-  FirebaseFirestore.instance.collection('workout/Dh84zosLMmjgRJkQYvWx/exercises/DWD92TbHIcNGz7uqdc12/sets');
+  final CollectionReference _exercises =
+  FirebaseFirestore.instance.collection('exercises/Dh84zosLMmjgRJkQYvWx/exercises/DWD92TbHIcNGz7uqdc12/sets');
 
   Map<String, dynamic>? additionalData;
 
   Future<String?> handleTag(NfcTag tag) async {
-    this.tag = tag;
+    tags.add(tag);
     additionalData = {};
 
     notifyListeners();
@@ -34,47 +34,56 @@ class TagReadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableProvider<TagReadModel>(
-        create: (_) => TagReadModel(),
-        builder: (context, child) {
-          return Expanded(
-            child: Scaffold(
-              body: Builder(
-                  builder: (BuildContext newContext) {
-                    return ListView(
-                      padding: const EdgeInsets.all(2),
+      create: (_) => TagReadModel(),
+      builder: (context, child) {
+        return Expanded(
+          child: Scaffold(
+            body: Builder(
+              builder: (BuildContext newContext) {
+                return ListView(
+                  padding: const EdgeInsets.all(2),
+                  children: [
+                    FormSection(
                       children: [
-                        FormSection(
-                          children: [
-                            FormRow(
-                              title: const Text('Add Exercise'),
-                              onTap: () => startSession(
-                                context: context,
-                                handleTag: Provider.of<TagReadModel>(context, listen: false).handleTag,
-                              ),
-                            ),
-                          ],
+                        FormRow(
+                          title: const Text('Add Exercise'),
+                          onTap: () => startSession(
+                            context: context,
+                            handleTag:
+                            Provider.of<TagReadModel>(context, listen: false)
+                                .handleTag,
+                          ),
                         ),
-                        Consumer<TagReadModel>(builder: (context, model, _) {
-                          final tag = model.tag;
-                          if (tag != null) {
-                            return _TagInfo(tag);
-                          }
-                          return const SizedBox.shrink();
-                        }),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/workoutlog');
-                              },
-                            child: const Text('Finish Workout'))
                       ],
-                    );
-                  }),
+                    ),
+                    Consumer<TagReadModel>(builder: (context, model, _) {
+                      final tags = model.tags;
+                      return ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: tags.length,
+                        itemBuilder: (context, index) {
+                          final tag = tags[index];
+                          return _TagInfo(tag);
+                        },
+                      );
+                    }),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(30, 215, 96, 1),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/workoutlog');
+                        },
+                        child: const Text('Finish Workout'))
+                  ],
+                );
+              },
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -93,17 +102,16 @@ class _TagInfo extends StatelessWidget {
     if (tech is Ndef) {
       final cachedMessage = tech.cachedMessage;
       final type = tech.additionalData['type'] as String?;
-      if (type != null) {
-      }
+      if (type != null) {}
       if (cachedMessage != null) {
         for (var i in Iterable.generate(cachedMessage.records.length)) {
           final record = cachedMessage.records[i];
           final info = NdefRecordInfo.fromNdef(record);
           ndefWidgets.add(FormRow(
-            title: Text(info.subtitle.replaceAll(('(en) '), '')),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(context, MaterialPageRoute(
-              builder: (context) => NdefRecordPage(i, record),
+              title: Text(info.subtitle.replaceAll(('(en) '), '')),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => NdefRecordPage(i, record),
             )),
           ));
         }
