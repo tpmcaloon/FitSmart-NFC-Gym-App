@@ -55,11 +55,18 @@ dependencies:
   url_launcher: ^6.1.10
   json_annotation: ^4.8.0
   permission: ^0.1.7
+  flutter_launcher_icons: ^0.12.0
   
 dev_dependencies:
   dependency_validator: ^3.0.0
+  flutter_launcher_icons: "^0.12.0"
 
-  flutter_test:
+flutter_icons:
+    android: "launcher_icon"
+    ios: true
+    image_path: "assets/fitsmartIcon.png"
+
+flutter_test:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -67,7 +74,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -109,12 +116,3 @@ flutter:
           weight: 700
         - asset: fonts/Roboto/Roboto-Black.ttf
           weight: 900
-          
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages

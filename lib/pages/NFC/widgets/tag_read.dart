@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_app/pages/NFC/common/form_row.dart';
 import 'package:fitness_app/pages/NFC/common/nfc_session.dart';
 import 'package:fitness_app/pages/NFC/widgets/ndef_record.dart';
@@ -8,9 +7,6 @@ import 'package:provider/provider.dart';
 
 class TagReadModel with ChangeNotifier {
   List<NfcTag> tags = [];
-
-  final CollectionReference _exercises =
-  FirebaseFirestore.instance.collection('exercises/Dh84zosLMmjgRJkQYvWx/exercises/DWD92TbHIcNGz7uqdc12/sets');
 
   Map<String, dynamic>? additionalData;
 
