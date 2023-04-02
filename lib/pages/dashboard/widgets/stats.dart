@@ -28,8 +28,8 @@ class _StatsState extends State<Stats> {
   }
 
   /// Fetch data points from the health plugin and show them in the app.
-  Future fetchData() async {
-    // define the types to get
+  Future<void> fetchData() async {
+    // Define the types to get
     final types = [
       HealthDataType.RESTING_HEART_RATE,
       HealthDataType.STEPS,
@@ -39,46 +39,44 @@ class _StatsState extends State<Stats> {
       HealthDataType.FLIGHTS_CLIMBED
     ];
 
-    // get data within the last 24 hours
+    // Get data within the last 24 hours
     final now = DateTime.now();
     final yesterday = now.subtract(const Duration(days: 1));
 
-    // requesting access to the data types before reading them
-    bool requested = await health.requestAuthorization(types);
+    // Requesting access to the data types before reading them
+    final isAuthorized = await health.requestAuthorization(types);
 
-    if (requested) {
+    if (isAuthorized) {
       try {
-        // fetch health data
+        // Fetch health data
         healthData = await health.getHealthDataFromTypes(yesterday, now, types);
 
         if (healthData.isNotEmpty) {
-          for (HealthDataPoint h in healthData) {
+          for (final h in healthData) {
             if (h.type == HealthDataType.RESTING_HEART_RATE) {
-              heartRate = "${h.value}";
+              heartRate = '${h.value}';
             } else if (h.type == HealthDataType.STEPS) {
-              steps = "${h.value}";
+              steps = '${h.value}';
             } else if (h.type == HealthDataType.ACTIVE_ENERGY_BURNED) {
-              activeEnergy = "${h.value}";
+              activeEnergy = '${h.value}';
             } else if (h.type == HealthDataType.EXERCISE_TIME) {
-              exerciseTime = "${h.value}";
+              exerciseTime = '${h.value}';
             } else if (h.type == HealthDataType.FLIGHTS_CLIMBED) {
-              flightsClimbed = "${h.value}";
+              flightsClimbed = '${h.value}';
             }
           }
           setState(() {});
         }
       } catch (error) {
-        print("Exception in getHealthDataFromTypes: $error");
+        print('Exception in getHealthDataFromTypes: $error');
       }
 
-      // filter out duplicates
+      // Filter out duplicates
       healthData = HealthFactory.removeDuplicates(healthData);
     } else {
-      print("Authorization not granted");
+      print('Authorization not granted');
     }
   }
-// class Stats extends StatelessWidget {
-//   const Stats({super.key});
 
   @override
   Widget build(BuildContext context) {
